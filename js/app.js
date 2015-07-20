@@ -136,11 +136,12 @@ app.setCurrentReadings = function(readings) {
 app.parseGreenButtonXml = function(xml) {
     // Save the XML for later...
     app.xml = xml;
-
+    var namespace="";
     // Pull out the IntervalReading and conver them to JSON.
     var intervals = $(app.xml).find('IntervalReading');
     if( intervals.length == 0){
         intervals = $(app.xml).find('espi\\:intervalreading');
+        namespace = "espi:";
     }
     // Find address, convert to text
     var address = $($(app.xml).find('entry > title')[0]).text();
@@ -150,10 +151,10 @@ app.parseGreenButtonXml = function(xml) {
     app.theoReadings = [];
     var totalCost = 0;
     for (var i = 0; i < intervals.length; i++) {
-        var start = $($(intervals[i]).find('start')).text() * 1000;
-        var duration = $($(intervals[i]).find('duration')).text();
-        var cost = Number($($(intervals[i]).find('cost')).text()) / 100000;
-        var value = $($(intervals[i]).find('value')).text();
+        var start = $($(intervals[i]).find(namespace+'start')).text() * 1000;
+        var duration = $($(intervals[i]).find(namespace+'duration')).text();
+        var cost = Number($($(intervals[i]).find(namespace+'cost')).text()) / 100000;
+        var value = $($(intervals[i]).find(namespace+'value')).text();
         totalCost += cost;
 
         //var date = new Date(start);
