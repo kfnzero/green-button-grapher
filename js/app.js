@@ -139,7 +139,9 @@ app.parseGreenButtonXml = function(xml) {
 
     // Pull out the IntervalReading and conver them to JSON.
     var intervals = $(app.xml).find('IntervalReading');
-
+    if( intervals == undefined){
+        intervals = $(app.xml).find('espi:IntervalReading');
+    }
     // Find address, convert to text
     var address = $($(app.xml).find('entry > title')[0]).text();
     $('#address').text(address);
