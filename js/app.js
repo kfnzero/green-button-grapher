@@ -141,7 +141,7 @@ app.parseGreenButtonXml = function(xml) {
     var intervals = $(app.xml).find('IntervalReading');
     if( intervals.length == 0){
         intervals = $(app.xml).find('espi\\:intervalreading');
-        namespace = "espi:";
+        namespace = "espi\\:";
     }
     // Find address, convert to text
     var address = $($(app.xml).find('entry > title')[0]).text();
